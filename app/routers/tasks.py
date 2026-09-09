@@ -14,7 +14,8 @@ def create_task(task: schemas.TaskCreate, db: Session = Depends(get_db)):
     new_task = models.Task(
         title=task.title,
         description=task.description,
-        completed=task.completed
+        completed=task.completed,
+        priority=task.priority
     )
     db.add(new_task)
     db.commit()
@@ -42,6 +43,7 @@ def update_task(task_id: int, updated_task: schemas.TaskCreate, db: Session = De
     task.title = updated_task.title
     task.description = updated_task.description
     task.completed = updated_task.completed
+    task.priority = updated_task.priority
 
     db.commit()
     db.refresh(task)

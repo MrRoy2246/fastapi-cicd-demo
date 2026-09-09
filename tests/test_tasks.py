@@ -38,12 +38,14 @@ def test_create_task():
     response = client.post("/tasks/", json={
         "title": "Test Task",
         "description": "Testing task creation",
-        "completed": False
+        "completed": False,
+        "priority": "high"
     })
     assert response.status_code == 200
     data = response.json()
     assert data["title"] == "Test Task"
     assert data["completed"] == False
+    assert data["priority"] == "high"
     assert "id" in data
 
 
